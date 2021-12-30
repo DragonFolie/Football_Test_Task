@@ -36,6 +36,18 @@ public class FlightController {
     }
 
 
+    @PostMapping(path="/addNewFlight/{companyName}/{factorySerialNumberOfPlane}")
+    @ResponseStatus(HttpStatus.OK)
+    public Flight allActiveFlight(@PathVariable("companyName")String companyName , @PathVariable("factorySerialNumberOfPlane") int factorySerialNumberOfPlane
+            ,@RequestBody Flight flight ) throws ParseException {
+
+        flightService.addFlightToCompany(factorySerialNumberOfPlane,companyName, flight.getDistance(),flight.getDepartureCountry()
+        ,flight.getDestinationCountry(),flight.getCreatedAt(),flight.getEndedAt(),flight.getEstimatedFlightTime(),flight.getDelayStartedAt());
+
+        return flight;
+    }
+
+
 
 
 

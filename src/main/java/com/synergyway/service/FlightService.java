@@ -2,11 +2,13 @@ package com.synergyway.service;
 
 
 import com.synergyway.entity.Flight;
+import com.synergyway.repository.AirplaneRepository;
 import com.synergyway.repository.FlightRepository;
 import jdk.jfr.Description;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -25,8 +27,7 @@ public class FlightService {
 
 
     private FlightRepository flightRepository;
-
-
+    private AirplaneRepository airplaneRepository;
 
 
     @Autowired
@@ -34,12 +35,14 @@ public class FlightService {
         this.flightRepository = flightRepository;
     }
 
+    @Autowired
+    public void setAirplaneRepository(AirplaneRepository airplaneRepository) { this.airplaneRepository = airplaneRepository; }
 
-    public List<Flight> findAllFlights(){
 
-        return flightRepository.findAll();
 
-    }
+
+
+    public List<Flight> findAllFlights(){ return flightRepository.findAll(); }
 
 
     public List<Flight> allActiveFlightLessThan24Hour(String newNameOfAirCompany)throws ParseException{
@@ -55,7 +58,6 @@ public class FlightService {
 
         for (int i = 0; i < list.size(); i++) {
 
-
            String dateTimeFrom =  list.get(i).getCreatedAt();
 
            if( !isMoreThan24Hour(dateTimeFrom,dateTimeNow) ){
@@ -65,8 +67,6 @@ public class FlightService {
         }
 
        return activeFlightList;
-
-
     }
 
     @Description("Format of date is  yyyy-MM-dd hh:mm:ss")
@@ -80,6 +80,17 @@ public class FlightService {
         return Math.abs(date1.getTime() - date2.getTime()) > MILLIS_PER_DAY;
     }
 
+
+
+    public void addFlightToCompany(int factorySerialNumber , String companyName,   int distance ,   String departureCountry,
+                                     String destinationCountry ,  String createdAt ,  String endedAt ,  String estimatedFlightTime ,  String delayStartedAt  ){
+
+        int airCompanyId  = airplaneRepository.getAirCompanyByName(companyName);
+        int airplaneId = airplaneRepository.getAirplaneByFactorySerialNumber(factorySerialNumber);
+
+        flightRepository.addFlight(distance,departureCountry,destinationCountry,createdAt,endedAt,estimatedFlightTime,delayStartedAt,airplaneId,airCompanyId);
+
+    }
 
 
 

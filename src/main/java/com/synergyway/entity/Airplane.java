@@ -49,10 +49,6 @@ public class Airplane {
     private AirCompany airCompany;
 
 
-
-
-
-
     public Airplane(String name, int factorySerialNumber, String numberOfFlight, int flightDistance, int fuelCapacity, String type, String createdAt) {
         this.name = name;
         this.factorySerialNumber = factorySerialNumber;
@@ -62,4 +58,6 @@ public class Airplane {
         this.type = type;
         this.createdAt = createdAt;
     }
+
+
 }

@@ -26,8 +26,19 @@ public class AirplaneController {
 
     }
 
+    @PostMapping(path = "/add/{CompanyName}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Airplane addAirplaneToCompany(@PathVariable("CompanyName")String name,@RequestBody Airplane airplane){
 
-    @PostMapping(path="/updateAirCompanyForAllPlane/{oldName}/{newName}")
+        airplaneService.addAirplaneToCompany(name,airplane.getName(),airplane.getFactorySerialNumber(),airplane.getNumberOfFlight(),
+                airplane.getFlightDistance(),airplane.getFuelCapacity(),airplane.getType(),airplane.getCreatedAt());
+
+        return  airplane;
+    }
+
+
+
+    @PutMapping(path="/updateAirCompanyForAllPlane/{oldName}/{newName}")
     @ResponseStatus(HttpStatus.OK)
     public String updateAirCompanyForAirplaneByPathVariable(@PathVariable("oldName") String oldName,@PathVariable("newName") String newName){
 
@@ -40,7 +51,7 @@ public class AirplaneController {
 
 
 
-    @PostMapping(path="/updateAirCompanyForSinglePlane/{serialNumberOfPlane}/{newNameOfAirCompany}")
+    @PutMapping(path="/updateAirCompanyForSinglePlane/{serialNumberOfPlane}/{newNameOfAirCompany}")
     @ResponseStatus(HttpStatus.OK)
     public String updateAirCompanyForSingleAirplane(@PathVariable("serialNumberOfPlane") int serialNumberOfPlane,@PathVariable("newNameOfAirCompany") String newNameOfAirCompany){
 
@@ -51,7 +62,7 @@ public class AirplaneController {
 
 
     @Deprecated
-    @PostMapping(path="/updateAirCompanyForAllPlane")
+    @PutMapping(path="/updateAirCompanyForAllPlane")
     @ResponseStatus(HttpStatus.OK)
     public NamesContainer updateAirCompanyForAirplaneByRequestBody(@RequestBody NamesContainer namesContainer){
 

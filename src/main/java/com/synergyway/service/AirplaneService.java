@@ -1,9 +1,12 @@
 package com.synergyway.service;
 
 
+import com.synergyway.entity.AirCompany;
 import com.synergyway.entity.Airplane;
+import com.synergyway.repository.AirCompanyRepository;
 import com.synergyway.repository.AirplaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,14 @@ public class AirplaneService {
     }
 
 
+    public void addAirplaneToCompany(String companyName , String name, int factorySerialNumber , String numberOfFlight ,
+                                     int flightDistance , int fuelCapacity ,String type , String createdAt ){
+
+        int airCompanyId  = getAirCompanyByName(companyName);
+        airplaneRepository.addAirplaneToCompany(name, factorySerialNumber, numberOfFlight, flightDistance, fuelCapacity, type, createdAt, airCompanyId);
+
+
+    }
 
 
 
@@ -29,17 +40,17 @@ public class AirplaneService {
     }
 
 
-    public int getAirplaneByName(String name) {
+    public int getAirCompanyByName(String name) {
 
-        return airplaneRepository.getAirplaneIdByName(name);
+        return airplaneRepository.getAirCompanyByName(name);
 
     }
 
 
     public void updateAirCompanyForAirplanes(String oldName,String newName){
 
-        int oldNameID = getAirplaneByName(oldName);
-        int newNameID = getAirplaneByName(newName);
+        int oldNameID = getAirCompanyByName(oldName);
+        int newNameID = getAirCompanyByName(newName);
 
         airplaneRepository.updateAirCompanyForAirplane(newNameID,oldNameID);
 
@@ -48,7 +59,7 @@ public class AirplaneService {
 
     public void updateAirCompanyForSingleAirplane(int serialNumberOfPlane,String newNameOfAirCompany){
 
-        int newNameID = getAirplaneByName(newNameOfAirCompany);
+        int newNameID = getAirCompanyByName(newNameOfAirCompany);
 
         airplaneRepository.updateAirCompanyForSingleAirplane(newNameID,serialNumberOfPlane);
 

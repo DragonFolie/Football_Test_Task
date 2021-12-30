@@ -21,6 +21,7 @@ public interface AirCompanyRepository extends JpaRepository<AirCompany,Long> {
 
 
 
+
     @Modifying
     @Query(value ="UPDATE air_company Set name = :name Where id = :id;",nativeQuery = true)
     public List<AirCompany> updateNameCompany(@Param("name") String name,@Param("id") int id );

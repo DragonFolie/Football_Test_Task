@@ -29,7 +29,7 @@ public class Flight {
     private String   destinationCountry;
 
     @Column(name = "distance")
-    private String   distance;
+    private int   distance;
 
     @Column(name = "estimated_flight_time")
     private String   estimatedFlightTime;
@@ -55,8 +55,8 @@ public class Flight {
     private Airplane airplane;
 
 
-    public Flight(String flightStatus, String departureCountry, String destinationCountry, String distance, String estimatedFlightTime, String endedAt, String delayStartedAt, String createdAt) {
-        this.flightStatus = flightStatus;
+    public Flight( String departureCountry, String destinationCountry, int distance, String estimatedFlightTime, String endedAt, String delayStartedAt, String createdAt) {
+
         this.departureCountry = departureCountry;
         this.destinationCountry = destinationCountry;
         this.distance = distance;

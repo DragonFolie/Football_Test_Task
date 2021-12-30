@@ -2,9 +2,11 @@ package com.synergyway.repository;
 
 import com.synergyway.entity.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,8 +25,16 @@ public interface FlightRepository extends JpaRepository<Flight,Long> {
     public List<Flight> getFlightWithActiveStatusAndLessThan24Hour(@Param("id") int id);
 
 
-    @Query(value = "select id from `air_company` WHERE name = :nameOfCompany  ;",nativeQuery = true)
-    public int ggg(@Param("nameOfCompany") String nameOfCompany);
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO flight (flight_status, distance, departure_country, destination_country, created_at, ended_at, estimated_flight_time, delay_started_at, airplane_id, air_Company_id) \n" +
+            "    VALUES ('PENDING' , :distance ,:departureCountry , :destinationCountry , :createdAt , :endedAt , :estimatedFlightTime , :delay_startedAt , :airplaneId , :airCompanyId ) ",nativeQuery = true)
+    public void addFlight(  @Param("distance") int distance , @Param("departureCountry")  String departureCountry
+            , @Param("destinationCountry") String destinationCountry , @Param("createdAt") String createdAt , @Param("endedAt") String endedAt
+            , @Param("estimatedFlightTime") String estimatedFlightTime , @Param("delay_startedAt") String delay_startedAt ,
+                           @Param("airplaneId") int airplaneId , @Param("airCompanyId") int airCompanyId   );
+
+
 
 
 }
