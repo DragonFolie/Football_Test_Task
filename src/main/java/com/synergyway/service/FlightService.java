@@ -18,13 +18,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static com.synergyway.classAssistants.TimeHelper.*;
 
 @Service
 @Data
 @RequiredArgsConstructor
 public class FlightService {
-
-
 
     private FlightRepository flightRepository;
     private AirplaneRepository airplaneRepository;
@@ -34,15 +35,14 @@ public class FlightService {
     public void setFlightRepository(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
-
     @Autowired
     public void setAirplaneRepository(AirplaneRepository airplaneRepository) { this.airplaneRepository = airplaneRepository; }
 
 
 
-
-
     public List<Flight> findAllFlights(){ return flightRepository.findAll(); }
+
+
 
 
     public List<Flight> allActiveFlightLessThan24Hour(String newNameOfAirCompany)throws ParseException{
@@ -51,10 +51,8 @@ public class FlightService {
         List<Flight> list = new ArrayList<>();
         list = flightRepository.getFlightWithActiveStatusAndLessThan24Hour(airCompanyId);
         List<Flight> activeFlightList = new ArrayList<>();
+        String dateTimeNow = getCurrentDateTime();
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTimeNow =  dtf.format(now);
 
         for (int i = 0; i < list.size(); i++) {
 
@@ -69,16 +67,9 @@ public class FlightService {
        return activeFlightList;
     }
 
-    @Description("Format of date is  yyyy-MM-dd hh:mm:ss")
-    public boolean isMoreThan24Hour(String dateTimeFrom,String dateTimeNow) throws ParseException{
 
-        long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date1 = sdf.parse(dateTimeNow);
-        Date date2 = sdf.parse(dateTimeFrom);
 
-        return Math.abs(date1.getTime() - date2.getTime()) > MILLIS_PER_DAY;
-    }
+
 
 
 
@@ -91,6 +82,69 @@ public class FlightService {
         flightRepository.addFlight(distance,departureCountry,destinationCountry,createdAt,endedAt,estimatedFlightTime,delayStartedAt,airplaneId,airCompanyId);
 
     }
+
+
+    public void updateStatusToDelay(int idOfFlight,String delayDateTime){
+
+        flightRepository.updateFlightStatusAndSetDelay(delayDateTime,idOfFlight);
+
+    }
+
+    public void updateFlightStatusToActive(int idOfFlight,String startDateTime){
+
+        flightRepository.updateFlightStatusAndSetStartedTime(startDateTime,idOfFlight);
+
+    }
+
+    public void updateFlightStatusToCompleted(int idOfFlight){
+
+        flightRepository.updateFlightStatusAndSetCompleteTime(idOfFlight);
+
+    }
+
+
+
+
+
+
+    public List<Flight> getAllFlightWithCompletedStatus(){
+        List <Flight> list = flightRepository.getAllFlightWithCompletedStatus();
+        List <Flight> newList = new ArrayList<>();
+
+//
+
+        for (int i = 0; i <list.size() ; i++) {
+
+            if (list.get(i).getDelayStartedAt() == null) {
+
+                String dateTimeOne = list.get(i).getCreatedAt();
+                String dateTimeTwo = list.get(i).getEndedAt();
+                long timeFlight =  findDifferentBetweenDateTime(dateTimeOne,dateTimeTwo);
+                long estimateFlightTime = timeConvertToMinute( list.get(i).getEstimatedFlightTime());
+
+                if (timeFlight > estimateFlightTime){
+                    newList.add(list.get(i));
+                }
+            }
+
+            if (list.get(i).getDelayStartedAt() != null) {
+                String dateTimeOne = list.get(i).getDelayStartedAt();
+                String dateTimeTwo = list.get(i).getEndedAt();
+                String estimatedFlightTime = list.get(i).getEstimatedFlightTime();
+                long timeFlight =  findDifferentBetweenDateTime(dateTimeOne,dateTimeTwo);
+                long estimateFlightTime = timeConvertToMinute(estimatedFlightTime );
+
+                if (timeFlight > estimateFlightTime){
+                    newList.add(list.get(i));
+                }
+            }
+
+        }
+
+
+        return newList;
+    }
+
 
 
 

@@ -1,0 +1,4 @@
+INSERT INTO synergy.airplane (id, name, factory_serial_number, number_of_flight, flight_distance, fuel_capacity, type, created_at, air_company_id) VALUES (7, 'Boeing 787 Dreamliner', 787001, 'EK77', 7800, 101000, 'Long Distance', '2001-05-05', 7);
+INSERT INTO synergy.airplane (id, name, factory_serial_number, number_of_flight, flight_distance, fuel_capacity, type, created_at, air_company_id) VALUES (8, 'Boeing 787 Dreamliner', 787002, 'EK96', 8200, 101000, 'Long Distance', '2002-05-05', 8);
+INSERT INTO synergy.airplane (id, name, factory_serial_number, number_of_flight, flight_distance, fuel_capacity, type, created_at, air_company_id) VALUES (9, 'Airbus a330', 315, 'EK64', 5600, 139000, 'Long Distance', '2003-05-05', 7);
+INSERT INTO synergy.airplane (id, name, factory_serial_number, number_of_flight, flight_distance, fuel_capacity, type, created_at, air_company_id) VALUES (10, 'Airbus a321', 321, 'EK25', 3200, 24050, 'Long Distance', '2004-05-05', 7);

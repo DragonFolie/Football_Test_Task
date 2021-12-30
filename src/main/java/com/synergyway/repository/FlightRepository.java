@@ -13,9 +13,6 @@ import java.util.List;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight,Long> {
 
-    @Query(value = "UPDATE flight SET  air_Company_id = :newAirCompanyId WHERE air_Company_id = :oldAirCompanyID",nativeQuery = true)
-    public List<Flight> updateCompanyId();
-
 
     @Query(value = "select id from `air_company` WHERE name = :nameOfCompany  ;",nativeQuery = true)
     public int getAirplaneIdByName(@Param("nameOfCompany") String nameOfCompany);
@@ -24,6 +21,13 @@ public interface FlightRepository extends JpaRepository<Flight,Long> {
     @Query(value = "select * from flight WHERE air_Company_id = :id AND flight_status = 'ACTIVE' ;",nativeQuery = true)
     public List<Flight> getFlightWithActiveStatusAndLessThan24Hour(@Param("id") int id);
 
+    @Query(value = "select * from flight WHERE  flight_status = 'COMPLETED' ;",nativeQuery = true)
+    public List<Flight> getAllFlightWithCompletedStatus();
+
+
+    @Modifying
+    @Query(value = "UPDATE flight SET  air_Company_id = :newAirCompanyId WHERE air_Company_id = :oldAirCompanyID",nativeQuery = true)
+    public List<Flight> updateCompanyId();
 
     @Modifying
     @Transactional
@@ -35,6 +39,21 @@ public interface FlightRepository extends JpaRepository<Flight,Long> {
                            @Param("airplaneId") int airplaneId , @Param("airCompanyId") int airCompanyId   );
 
 
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE flight Set flight_status = 'DELAYED' , delay_started_at = :delayDateTime WHERE id = :id ;",nativeQuery = true)
+    public void updateFlightStatusAndSetDelay(@Param("delayDateTime") String delayDateTime , @Param("id") int id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE flight Set flight_status = 'COMPLETED'  WHERE id = :id ;",nativeQuery = true)
+    public void updateFlightStatusAndSetCompleteTime( @Param("id") int id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE flight Set flight_status = 'ACTIVE' , created_at = :startedAt WHERE id = :id ;",nativeQuery = true)
+    public void updateFlightStatusAndSetStartedTime(@Param("startedAt") String startAtDateTime , @Param("id") int id);
 
 
 }
