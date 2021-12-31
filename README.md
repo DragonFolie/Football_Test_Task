@@ -18,7 +18,7 @@ For running mysql Database.
 
 6) CREATE DATABASE synergy CHARACTER SET utf8 COLLATE utf8_general_ci;
 7) use synergy;
-8) insert data which are in /Data folder  ( *.sql files )
+8) create and insert data which are in /Data folder  ( *.sql files for insert data)
 
 For running Spring Rest Api
 
