@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "8649d86e-6970-4913-a707-373555ccaf0e",
+		"name": "Airplane",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All airplanes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/airplane/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update air company for airplane",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/airplane/updateAirCompanyForSinglePlane/{serialNumberOfPlane}/{newNameOfAirCompany}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"updateAirCompanyForSinglePlane",
+						"{serialNumberOfPlane}",
+						"{newNameOfAirCompany}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new airplane to company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"name\": \"TEST\",\r\n        \"factorySerialNumber\": 99,\r\n        \"numberOfFlight\": \"EK77\",\r\n        \"flightDistance\": 555,\r\n        \"fuelCapacity\": 50,\r\n        \"type\": \"Long Distance\",\r\n        \"createdAt\": \"2000-05-05\"\r\n        \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/airplane/add/{CompanyName}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"add",
+						"{CompanyName}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

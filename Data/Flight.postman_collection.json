@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "07212fc6-6aaa-433c-ac37-ac75c240d7e4",
+		"name": "Flight",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find all flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flight/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Completed Flight with difference between started and ended time is bigger than estimated flight time.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flight/allCompletedFlight",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"allCompletedFlight"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All active flight less than 24 hour from current time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flight/allActiveFlight/Turkish Airlines",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"allActiveFlight",
+						"Turkish Airlines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new Flight ( input data in link and body )",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"departureCountry\": \"UK\",\r\n        \"destinationCountry\": \"UK\",\r\n        \"distance\": 505,\r\n        \"estimatedFlightTime\": \"00:10:00\",\r\n        \"endedAt\": \"2021-12-28 05:10:00\",\r\n        \"delayStartedAt\": null,\r\n        \"createdAt\": \"2021-12-28 04:40:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/flight/addNewFlight/{companyName}/{factorySerialNumberOfPlane}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"addNewFlight",
+						"{companyName}",
+						"{factorySerialNumberOfPlane}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update flight status to active",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flight/updateFlightStatusToActive/{flightId}/{newTimeStartOfFlightInDateTime}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"updateFlightStatusToActive",
+						"{flightId}",
+						"{newTimeStartOfFlightInDateTime}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update flight status to completed",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flight/updateFlightStatusToCompleted/{flightId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"updateFlightStatusToCompleted",
+						"{flightId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update flight status to delay",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/flight/{flightId}/{newTimeStartOfFlightInDateTime}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flight",
+						"{flightId}",
+						"{newTimeStartOfFlightInDateTime}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   employee-jdbc:
     image: employee-jdbc
@@ -10,7 +10,7 @@ services:
       - synergy_container
 
   mysqldb:
-    image: mysql:latest
+    image: mysql:8
     networks:
       - employee-mysql
     environment:
