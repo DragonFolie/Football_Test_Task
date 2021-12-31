@@ -1,19 +1,26 @@
 # SynergyTestTask
 
 What you need to start the project:
+Password in mysql bash  is 1234
+
+For running mysql Database.
 
 1) docker run --name synergy_container -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql/mysql-server:5.7
 
 2) docker exec -it synergy_container bash
-   Password is 1234
-
-3) CREATE USER 'demo_java' IDENTIFIED BY 'java';
+3) mysql -h localhost -u root -p
+4) Enter password 1234
+5) 
+6) CREATE USER 'demo_java' IDENTIFIED BY 'java';
    grant all on *.* to 'demo_java'@'%' identified by '1234';
    FLUSH PRIVILEGES;
 
-4) CREATE DATABASE synergy CHARACTER SET utf8 COLLATE utf8_general_ci;  
+6) CREATE DATABASE synergy CHARACTER SET utf8 COLLATE utf8_general_ci;  
+7) use synergy;
+8) insert data which are in /Data folder  ( *.sql files )
 
-5)  insert data which are in /Data folder  ( *.sql files )
+For running Spring Rest Api
+
 
 Additional Information
 
