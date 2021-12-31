@@ -1,5 +1,7 @@
 # SynergyTestTask
 
+docker build -t demo-package-only-build-demo .
+docker run -d -p 8080:8080 demo-package-only-build-demo
 
 
 

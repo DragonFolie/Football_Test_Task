@@ -57,7 +57,7 @@ public class AirCompanyController {
     {
         airCompanyService.updateNameCompany(airCompany);
 
-        return "Ok now you have new name of your company - "+airCompany.getName()+" :)";
+        return "Ok now you have updated company  :)";
 
 
     }

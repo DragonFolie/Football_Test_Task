@@ -47,7 +47,8 @@ public class FlightService {
 
     public List<Flight> allActiveFlightLessThan24Hour(String newNameOfAirCompany)throws ParseException{
 
-        int airCompanyId =  flightRepository.getAirplaneIdByName(newNameOfAirCompany);
+        int airCompanyId =  airplaneRepository.getAirCompanyByName(newNameOfAirCompany);
+        System.out.println(airCompanyId);
         List<Flight> list = new ArrayList<>();
         list = flightRepository.getFlightWithActiveStatusAndLessThan24Hour(airCompanyId);
         List<Flight> activeFlightList = new ArrayList<>();
