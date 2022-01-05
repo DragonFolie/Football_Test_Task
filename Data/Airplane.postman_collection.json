@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "8649d86e-6970-4913-a707-373555ccaf0e",
+		"name": "Airplane",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All airplanes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/airplane/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update air company for airplane",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 7,\r\n        \"name\": \"Boeing 787 Dreamliner\",\r\n        \"factorySerialNumber\": 787001,\r\n        \"numberOfFlight\": \"EK77\",\r\n        \"flightDistance\": 7800,\r\n        \"fuelCapacity\": 101000,\r\n        \"type\": \"Long Distance\",\r\n        \"createdAt\": \"2001-05-05\",\r\n        \"airCompany\": {\r\n            \"id\": 9,\r\n            \"name\": \"Emirates Airline\",\r\n            \"companyType\": \"type3\",\r\n            \"foundedAt\": \"2005-07-04\"\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/airplane/updateAirCompanyForSinglePlane",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"updateAirCompanyForSinglePlane"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update air company for many airplanes",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 7,\r\n        \"name\": \"Boeing 787 Dreamliner\",\r\n        \"factorySerialNumber\": 787001,\r\n        \"numberOfFlight\": \"EK77\",\r\n        \"flightDistance\": 7800,\r\n        \"fuelCapacity\": 101000,\r\n        \"type\": \"Long Distance\",\r\n        \"createdAt\": \"2001-05-05\",\r\n        \"airCompany\": {\r\n            \"id\": 9,\r\n            \"name\": \"Emirates Airline\",\r\n            \"companyType\": \"type3\",\r\n            \"foundedAt\": \"2005-07-04\"\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/airplane/updateAirCompanyForAllPlanes/{oldName}/{newName}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"updateAirCompanyForAllPlanes",
+						"{oldName}",
+						"{newName}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new airplane to company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"name\": \"TEST\",\r\n        \"factorySerialNumber\": 99,\r\n        \"numberOfFlight\": \"EK77\",\r\n        \"flightDistance\": 555,\r\n        \"fuelCapacity\": 50,\r\n        \"type\": \"Long Distance\",\r\n        \"createdAt\": \"2000-05-05\"\r\n        \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/airplane/add/{ CompanyName }",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"airplane",
+						"add",
+						"{ CompanyName }"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
