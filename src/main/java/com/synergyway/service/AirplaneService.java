@@ -6,7 +6,6 @@ import com.synergyway.entity.Airplane;
 import com.synergyway.repository.AirCompanyRepository;
 import com.synergyway.repository.AirplaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +14,12 @@ import java.util.List;
 public class AirplaneService {
 
     private AirplaneRepository airplaneRepository;
+    private AirCompanyRepository airCompanyRepository;
+
+    @Autowired
+    public void setAirCompany(AirCompanyRepository airCompanyRepository) {
+        this.airCompanyRepository = airCompanyRepository;
+    }
 
     @Autowired
     public void setAirplaneRepository(AirplaneRepository airplaneRepository) {
@@ -22,11 +27,12 @@ public class AirplaneService {
     }
 
 
-    public void addAirplaneToCompany(String companyName , String name, int factorySerialNumber , String numberOfFlight ,
-                                     int flightDistance , int fuelCapacity ,String type , String createdAt ){
+    public void addAirplaneToCompany(String companyName , Airplane airplane ){
 
-        int airCompanyId  = getAirCompanyByName(companyName);
-        airplaneRepository.addAirplaneToCompany(name, factorySerialNumber, numberOfFlight, flightDistance, fuelCapacity, type, createdAt, airCompanyId);
+
+        AirCompany airCompany =  airCompanyRepository.findByName(companyName);
+        airplane.setAirCompany(airCompany);
+        airplaneRepository.save(airplane);
 
 
     }
@@ -42,7 +48,8 @@ public class AirplaneService {
 
     public int getAirCompanyByName(String name) {
 
-        return airplaneRepository.getAirCompanyByName(name);
+
+        return airplaneRepository.getAirCompanyIdByName(name);
 
     }
 
@@ -57,11 +64,9 @@ public class AirplaneService {
     }
 
 
-    public void updateAirCompanyForSingleAirplane(int serialNumberOfPlane,String newNameOfAirCompany){
+    public Airplane updateAirCompanyForSingleAirplane(Airplane airplane){
 
-        int newNameID = getAirCompanyByName(newNameOfAirCompany);
-
-        airplaneRepository.updateAirCompanyForSingleAirplane(newNameID,serialNumberOfPlane);
+       return airplaneRepository.save(airplane);
 
 
     }

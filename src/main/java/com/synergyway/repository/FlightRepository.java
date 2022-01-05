@@ -18,8 +18,10 @@ public interface FlightRepository extends JpaRepository<Flight,Long> {
     public int getAirplaneIdByName(@Param("nameOfCompany") String nameOfCompany);
 
 
+
+
     @Query(value = "select * from flight WHERE air_Company_id = :id AND flight_status = 'ACTIVE' ;",nativeQuery = true)
-    public List<Flight> getFlightWithActiveStatusAndLessThan24Hour(@Param("id") int id);
+    public List<Flight> getFlightWithActiveStatus(@Param("id") int id);
 
     @Query(value = "select * from flight WHERE  flight_status = 'COMPLETED' ;",nativeQuery = true)
     public List<Flight> getAllFlightWithCompletedStatus();

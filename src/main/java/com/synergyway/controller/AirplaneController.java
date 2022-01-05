@@ -18,58 +18,41 @@ public class AirplaneController {
     private AirplaneService airplaneService;
 
 
-    @GetMapping(path="/all")
+    @GetMapping(path = "/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<Airplane> findAllCompanies()
-    {
-        return  airplaneService.getAllAirplanes();
+    public List<Airplane> findAllCompanies() {
+        return airplaneService.getAllAirplanes();
 
     }
 
     @PostMapping(path = "/add/{CompanyName}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Airplane addAirplaneToCompany(@PathVariable("CompanyName")String name,@RequestBody Airplane airplane){
+    public Airplane addAirplaneToCompany(@PathVariable("CompanyName") String name, @RequestBody Airplane airplane) {
 
-        airplaneService.addAirplaneToCompany(name,airplane.getName(),airplane.getFactorySerialNumber(),airplane.getNumberOfFlight(),
-                airplane.getFlightDistance(),airplane.getFuelCapacity(),airplane.getType(),airplane.getCreatedAt());
+        airplaneService.addAirplaneToCompany(name, airplane);
 
-        return  airplane;
+        return airplane;
     }
 
 
-
-    @PutMapping(path="/updateAirCompanyForAllPlane/{oldName}/{newName}")
+    @PutMapping(path = "/updateAirCompanyForAllPlanes/{oldName}/{newName}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateAirCompanyForAirplaneByPathVariable(@PathVariable("oldName") String oldName,@PathVariable("newName") String newName){
+    public String updateAirCompanyForAirplaneByPathVariable(@PathVariable("oldName") String oldName, @PathVariable("newName") String newName) {
 
-        airplaneService.updateAirCompanyForAirplanes(oldName,newName);
+        airplaneService.updateAirCompanyForAirplanes(oldName, newName);
 
         return "Nice";
     }
 
 
-
-
-
-    @PutMapping(path="/updateAirCompanyForSinglePlane/{serialNumberOfPlane}/{newNameOfAirCompany}")
+    @PutMapping(path = "/updateAirCompanyForSinglePlane")
     @ResponseStatus(HttpStatus.OK)
-    public String updateAirCompanyForSingleAirplane(@PathVariable("serialNumberOfPlane") int serialNumberOfPlane,@PathVariable("newNameOfAirCompany") String newNameOfAirCompany){
+    public Airplane updateAirCompanyForSingleAirplane(@RequestBody Airplane airplane) {
 
-        airplaneService.updateAirCompanyForSingleAirplane(serialNumberOfPlane,newNameOfAirCompany);
+        airplaneService.updateAirCompanyForSingleAirplane(airplane);
 
-        return "Nice";
-    }
+        return airplane;
 
-
-    @Deprecated
-    @PutMapping(path="/updateAirCompanyForAllPlane")
-    @ResponseStatus(HttpStatus.OK)
-    public NamesContainer updateAirCompanyForAirplaneByRequestBody(@RequestBody NamesContainer namesContainer){
-
-        namesContainer.setNewName(namesContainer.getNewName());
-        namesContainer.setOldName(namesContainer.getOldName());
-
-        return namesContainer;
     }
 
 }

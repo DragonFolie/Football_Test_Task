@@ -47,10 +47,10 @@ public class FlightService {
 
     public List<Flight> allActiveFlightLessThan24Hour(String newNameOfAirCompany)throws ParseException{
 
-        int airCompanyId =  airplaneRepository.getAirCompanyByName(newNameOfAirCompany);
+        int airCompanyId =  airplaneRepository.getAirCompanyIdByName(newNameOfAirCompany);
         System.out.println(airCompanyId);
         List<Flight> list = new ArrayList<>();
-        list = flightRepository.getFlightWithActiveStatusAndLessThan24Hour(airCompanyId);
+        list = flightRepository.getFlightWithActiveStatus(airCompanyId);
         List<Flight> activeFlightList = new ArrayList<>();
         String dateTimeNow = getCurrentDateTime();
 
@@ -77,7 +77,7 @@ public class FlightService {
     public void addFlightToCompany(int factorySerialNumber , String companyName,   int distance ,   String departureCountry,
                                      String destinationCountry ,  String createdAt ,  String endedAt ,  String estimatedFlightTime ,  String delayStartedAt  ){
 
-        int airCompanyId  = airplaneRepository.getAirCompanyByName(companyName);
+        int airCompanyId  = airplaneRepository.getAirCompanyIdByName(companyName);
         int airplaneId = airplaneRepository.getAirplaneByFactorySerialNumber(factorySerialNumber);
 
         flightRepository.addFlight(distance,departureCountry,destinationCountry,createdAt,endedAt,estimatedFlightTime,delayStartedAt,airplaneId,airCompanyId);

@@ -1,6 +1,7 @@
 package com.synergyway.controller;
 
 import com.synergyway.entity.AirCompany;
+import com.synergyway.entity.Airplane;
 import com.synergyway.repository.AirCompanyRepository;
 import com.synergyway.service.AirCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -28,9 +28,9 @@ public class FlightController {
         return flightService.findAllFlights();
     }
 
-    @GetMapping(path="/allActiveFlight/{companyName}")
+    @GetMapping(path="/allActiveFlightLessThan24Hour/{companyName}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Flight> allActiveFlight(@PathVariable("companyName")String companyName ) throws ParseException {
+    public List<Flight> allActiveFlightLessThan24Hour(@PathVariable("companyName")String companyName ) throws ParseException {
 
         return flightService.allActiveFlightLessThan24Hour(companyName);
     }
