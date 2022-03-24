@@ -3,6 +3,7 @@ package com.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "players")
 @Getter
+@Setter
 @ToString
 public class Player {
 
@@ -31,6 +33,9 @@ public class Player {
     @JoinColumn(name = "football_teams_id")
     private FootballTeam footballTeam;
 
+
+
+
     public Player( String fullName, int age, String position) {
 
         this.fullName = fullName;
@@ -38,7 +43,12 @@ public class Player {
         this.position = position;
     }
 
-
+    public Player(String fullName, int age, String position, FootballTeam footballTeam) {
+        this.fullName = fullName;
+        this.age = age;
+        this.position = position;
+        this.footballTeam = footballTeam;
+    }
 
     public Player() {
     }

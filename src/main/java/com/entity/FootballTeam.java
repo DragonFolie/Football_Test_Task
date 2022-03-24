@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "football_teams")
@@ -23,7 +24,8 @@ public class FootballTeam {
     @Column(name = "owner")
     private String owner;
 
-
+//    @OneToMany(mappedBy="footballTeam")
+//    private Set<Player> items;
 
 
 
