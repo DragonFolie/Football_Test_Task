@@ -1,4 +1,4 @@
-FROM openjdk:11.0.7-jdk-slim
+FROM openjdk:8
 
 COPY ["target/demo-0.0.1-SNAPSHOT.jar","demo-0.0.1-SNAPSHOT.jar"]
 

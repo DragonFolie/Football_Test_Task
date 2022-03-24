@@ -1,4 +1,4 @@
-package com.synergyway.classAssistants;
+package com.classAssistants;
 
 import lombok.*;
 import org.springframework.stereotype.Component;

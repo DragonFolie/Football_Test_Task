@@ -7,15 +7,15 @@ services:
     networks:
       - employee-mysql
     depends_on:
-      - synergy_container
+      - mysqldb
 
   mysqldb:
     image: mysql:8
     networks:
       - employee-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=synergy
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bootdb
 
 networks:
   employee-mysql:

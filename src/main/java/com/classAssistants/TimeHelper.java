@@ -1,4 +1,4 @@
-package com.synergyway.classAssistants;
+package com.classAssistants;
 
 import jdk.jfr.Description;
 
