@@ -8,13 +8,17 @@ import com.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/football")
+@Validated
 public class FootballTeamController {
 
     @Autowired
@@ -43,7 +47,7 @@ public class FootballTeamController {
 
     @PostMapping(path = "/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Player> addNewTeam(@RequestBody FootballTeam footballTeam){
+    public ResponseEntity<Player> addNewTeam( @Valid @RequestBody FootballTeam footballTeam ){
 
         footballTeamService.addNewTeam(footballTeam);
         return ResponseEntity.ok().build() ;
@@ -54,7 +58,7 @@ public class FootballTeamController {
 
     @PutMapping(path = "/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Player> updateTeam(@RequestBody FootballTeam footballTeam){
+    public ResponseEntity<Player> updateTeam(@Valid @RequestBody FootballTeam footballTeam){
 
         footballTeamService.updateTeam(footballTeam);
         return ResponseEntity.ok().build() ;

@@ -1,5 +1,10 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -8,8 +13,8 @@ public class test {
 
     public static void main(String[] args) throws Exception {
 
-        String dateTimeFrom = "2022-01-06 22:00:00";
-        String dateTimeNow = "2022-01-06 21:00:00";
+//        String dateTimeFrom = "2022-01-06 22:00:00";
+//        String dateTimeNow = "2022-01-06 21:00:00";
 
 //        long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -27,12 +32,25 @@ public class test {
 //        System.out.println(TimeUnit.MILLISECONDS.toMinutes(diff));
 
 
-        long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date1 = sdf.parse(dateTimeNow);
-        Date date2 = sdf.parse(dateTimeFrom);
+//        long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        Date date1 = sdf.parse(dateTimeNow);
+//        Date date2 = sdf.parse(dateTimeFrom);
+//
+//        System.out.println( Math.abs(date1.getTime() - date2.getTime()) > MILLIS_PER_DAY );
 
-        System.out.println( Math.abs(date1.getTime() - date2.getTime()) > MILLIS_PER_DAY );
+
+
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        long monthsBetween = ChronoUnit.MONTHS.between(
+                LocalDate.parse("2021-02-24").withDayOfMonth(1),
+                LocalDate.parse("2022-04-24").withDayOfMonth(1));
+
+        System.out.println(monthsBetween);
+
+
 
 
 
