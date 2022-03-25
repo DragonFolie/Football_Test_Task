@@ -101,14 +101,14 @@ public class FootballTeamController {
 
     }
 
-    @ExceptionHandler
-    public ResponseEntity<TeamIncorrectData> handle_exception(Exception exception){
-        TeamIncorrectData data = new TeamIncorrectData();
-        data.setInfo(exception.getMessage());
-
-        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
-
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<TeamIncorrectData> handle_exception(Exception exception){
+//        TeamIncorrectData data = new TeamIncorrectData();
+//        data.setInfo(exception.getMessage());
+//
+//        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
+//
+//    }
 
     @ExceptionHandler
     public ResponseEntity<TeamIncorrectData> handle_exception(EntityNotFoundException exception){

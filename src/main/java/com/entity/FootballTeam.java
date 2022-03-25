@@ -40,6 +40,8 @@ public class FootballTeam {
     @NotNull
     private int balance;
 
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "")
+
 
     public FootballTeam(String name, String owner, int transfer_fee, int balance) {
         this.name = name;

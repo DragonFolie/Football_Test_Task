@@ -101,14 +101,14 @@ public class PlayerController {
 
     }
 
-    @ExceptionHandler
-    public ResponseEntity<PlayerIncorrectData> handle_exception(Exception exception){
-        PlayerIncorrectData data = new PlayerIncorrectData();
-        data.setInfo(exception.getMessage());
-
-        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
-
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<PlayerIncorrectData> handle_exception(Exception exception){
+//        PlayerIncorrectData data = new PlayerIncorrectData();
+//        data.setInfo(exception.getMessage());
+//
+//        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
+//
+//    }
 
     @ExceptionHandler
     public ResponseEntity<PlayerIncorrectData> handle_exception(EntityNotFoundException exception){
