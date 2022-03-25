@@ -7,12 +7,11 @@ import com.service.FootballTeamService;
 import com.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/football")
@@ -22,13 +21,61 @@ public class FootballTeamController {
     private FootballTeamService footballTeamService;
 
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/")
     @ResponseStatus(HttpStatus.OK)
-    public List<FootballTeam> findAllTeam(){
+    public List<FootballTeam> findAllPlayers(){
 
         return footballTeamService.findAllTeam();
 
     }
+
+
+
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<FootballTeam> findById(@PathVariable("id")Long id){
+
+        return footballTeamService.findById(id);
+
+    }
+
+
+
+    @PostMapping(path = "/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Player> addNewTeam(@RequestBody FootballTeam footballTeam){
+
+        footballTeamService.addNewTeam(footballTeam);
+        return ResponseEntity.ok().build() ;
+
+    }
+
+
+
+    @PutMapping(path = "/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Player> updateTeam(@RequestBody FootballTeam footballTeam){
+
+        footballTeamService.updateTeam(footballTeam);
+        return ResponseEntity.ok().build() ;
+
+    }
+
+
+    @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Player> deleteTeam(@PathVariable("id")Long id){
+
+        footballTeamService.deleteTeam(id);
+        return ResponseEntity.ok().build() ;
+
+    }
+
+
+
+
+
+
 
 
 }

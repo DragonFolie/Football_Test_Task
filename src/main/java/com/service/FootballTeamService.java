@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Data
@@ -28,6 +29,35 @@ public class FootballTeamService {
         return  footballTeamRepository.findAll();
 
     }
+
+    public Optional<FootballTeam> findById(Long id){
+
+        return  footballTeamRepository.findById(id);
+    }
+
+
+    public void addNewTeam(FootballTeam footballTeam){
+
+        footballTeamRepository.save(footballTeam);
+
+    }
+
+    public void updateTeam(FootballTeam footballTeam){
+
+        footballTeamRepository.save(footballTeam);
+
+    }
+
+
+    public void deleteTeam(Long id){
+
+        footballTeamRepository.deleteById(id);
+
+    }
+
+
+
+
 
 
 
