@@ -75,7 +75,7 @@ public class PlayerService {
         try {
             System.out.println(experienceNow + "   ++ " );
             System.out.println(experienceFrom + "  ////  " );
-             experienceNow =  monthAgoFrom(experienceFrom); // готовий досвід
+             experienceNow =  monthAgoFrom(experienceFrom);
             System.out.println(experienceNow + "  --  " );
         } catch (ParseException e) {
             e.printStackTrace();
@@ -110,11 +110,6 @@ public class PlayerService {
         System.out.println("Done 3");
 
     }
-
-//    вартість трансферу = кількість місяців досвіду гравця * 100000 / вік гравця у роках
-//    комісія зі сторони команди (від 0% до 10% від вартості трансферу) - вказується в інформації про команду
-//    повна сума (вартість трансферу + комісія) повинна зніматись з рахунку команди,
-//    яка купує гравця, і переходити на рахунок команди, яка продає
 
 
 

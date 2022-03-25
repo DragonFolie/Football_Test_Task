@@ -1,14 +1,11 @@
 package com.entity;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "football_teams")

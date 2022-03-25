@@ -2,6 +2,8 @@ package com.controller;
 
 
 import com.entity.Player;
+import com.exception_handler.NoSuchPlayerException;
+import com.exception_handler.PlayerIncorrectData;
 import com.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +29,14 @@ public class PlayerController {
     @GetMapping(path = "/")
     @ResponseStatus(HttpStatus.OK)
     public List<Player> findAllPlayers(){
+        List<Player> list = playerService.findAllPlayers();
 
 
+        if(list.isEmpty() ){
+            throw new NoSuchPlayerException("No such player founded or List of players is empty");
+        }
 
-        return playerService.findAllPlayers();
+        return list;
 
     }
 
@@ -37,7 +44,14 @@ public class PlayerController {
     @ResponseStatus(HttpStatus.OK)
     public Optional<Player> findPlayerById(@PathVariable("id") Long id){
 
-        return playerService.findPlayerById(id);
+        Optional<Player> list = playerService.findPlayerById(id);
+
+
+        if(list.isEmpty()  ){
+            throw new NoSuchPlayerException("No such player founded or list of players is empty");
+        }
+
+        return list;
 
     }
 
@@ -69,7 +83,6 @@ public class PlayerController {
 
     }
 
-//    http://localhost:8080/player/transfer/8/4/5
     @PostMapping(path = "/playerTransfer/{idPlayer}/{idOldTeam}/{idNewTeam}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Player> transfer( @PathVariable("idPlayer")Long idPlayer, @PathVariable("idOldTeam")Long idOldTeam, @PathVariable("idNewTeam")Long idNewTeam){
@@ -79,6 +92,32 @@ public class PlayerController {
 
     }
 
+    @ExceptionHandler
+    public ResponseEntity<PlayerIncorrectData> handle_exception(NoSuchPlayerException exception){
+        PlayerIncorrectData data = new PlayerIncorrectData();
+        data.setInfo(exception.getMessage());
+
+        return new ResponseEntity<>(data,HttpStatus.NOT_FOUND);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<PlayerIncorrectData> handle_exception(Exception exception){
+        PlayerIncorrectData data = new PlayerIncorrectData();
+        data.setInfo(exception.getMessage());
+
+        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<PlayerIncorrectData> handle_exception(EntityNotFoundException exception){
+        PlayerIncorrectData data = new PlayerIncorrectData();
+        data.setInfo(exception.getMessage());
+
+        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
+
+    }
 
 
 

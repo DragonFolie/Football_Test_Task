@@ -3,6 +3,10 @@ package com.controller;
 
 import com.entity.FootballTeam;
 import com.entity.Player;
+import com.exception_handler.NoSuchFootballTeamException;
+import com.exception_handler.NoSuchPlayerException;
+import com.exception_handler.PlayerIncorrectData;
+import com.exception_handler.TeamIncorrectData;
 import com.service.FootballTeamService;
 import com.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +34,12 @@ public class FootballTeamController {
     @ResponseStatus(HttpStatus.OK)
     public List<FootballTeam> findAllPlayers(){
 
-        return footballTeamService.findAllTeam();
+        List<FootballTeam> list= footballTeamService.findAllTeam();
+        if (list.isEmpty()){
+            throw new NoSuchFootballTeamException("No such team founded or list of players is empty");
+        }
+
+        return list;
 
     }
 
@@ -39,7 +49,13 @@ public class FootballTeamController {
     @ResponseStatus(HttpStatus.OK)
     public Optional<FootballTeam> findById(@PathVariable("id")Long id){
 
-        return footballTeamService.findById(id);
+        Optional<FootballTeam> list= footballTeamService.findById(id);
+        if (list.isEmpty()){
+            throw new NoSuchFootballTeamException("No such team founded or list of players is empty");
+        }
+
+        return list;
+
 
     }
 
@@ -75,6 +91,33 @@ public class FootballTeamController {
 
     }
 
+
+    @ExceptionHandler
+    public ResponseEntity<TeamIncorrectData> handle_exception(NoSuchFootballTeamException exception){
+        TeamIncorrectData data = new TeamIncorrectData();
+        data.setInfo(exception.getMessage());
+
+        return new ResponseEntity<>(data,HttpStatus.NOT_FOUND);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<TeamIncorrectData> handle_exception(Exception exception){
+        TeamIncorrectData data = new TeamIncorrectData();
+        data.setInfo(exception.getMessage());
+
+        return new ResponseEntity<>(data,HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<TeamIncorrectData> handle_exception(EntityNotFoundException exception){
+        TeamIncorrectData data = new TeamIncorrectData();
+        data.setInfo(exception.getMessage());
+
+        return new ResponseEntity<>(data,HttpStatus.NOT_FOUND);
+
+    }
 
 
 
