@@ -61,5 +61,5 @@ INSERT INTO football_teams (name, owner, transfer_fee, balance) values ('Manches
 
 INSERT INTO players (full_name, age, position, career_start_from, football_teams_id) VALUES ('Cristiano Ronaldo','37','Attacker','1993-10-01',3);
 INSERT INTO players (full_name, age, position, career_start_from, football_teams_id) VALUES ('Kepa Arrizabalaga','27','Goalkeeper','2011-03-05',2);
-INSERT INTO players (full_name, age, position, career_start_from, football_teams_id) VALUES ('Saúl Ñíguez','27','Midfielder','2006-02-10',2)
+INSERT INTO players (full_name, age, position, career_start_from, football_teams_id) VALUES ('Saul Niguez','27','Midfielder','2006-02-10',2)
 

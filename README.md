@@ -7,18 +7,7 @@ What you need to start the project:
 
 For running mysql Database.
 
-1) docker run --name synergy_container -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql/mysql-server:5.7
-
-2) docker exec -it synergy_container bash
-3) mysql -h localhost -u root -p
-4) Enter password 1234
-5)CREATE USER 'demo_java' IDENTIFIED BY 'java';
-   grant all on *.* to 'demo_java'@'%' identified by '1234';
-   FLUSH PRIVILEGES;
-
-6) CREATE DATABASE synergy CHARACTER SET utf8 COLLATE utf8_general_ci;
-7) use synergy;
-8) create and insert data which are in /Data folder  ( *.sql files for insert data)
+1) 
 
 For running Spring Rest Api
 

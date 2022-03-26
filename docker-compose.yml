@@ -1,21 +1,14 @@
-version: "3.8"
+version: '3.1'
+
 services:
-  employee-jdbc:
-    image: employee-jdbc
-    ports:
-      - "8080:8080"
-    networks:
-      - employee-mysql
-    depends_on:
-      - mysqldb
 
-  mysqldb:
-    image: mysql:8
-    networks:
-      - employee-mysql
+  db:
+    image: mysql
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=bootdb
-
-networks:
-  employee-mysql:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: footballDB
+    ports:
+      - "3307:3306"
+    volumes:
+      - G:\Developing\Football_manager\Data\football_manager.sql
