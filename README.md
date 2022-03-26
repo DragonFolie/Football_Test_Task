@@ -3,7 +3,7 @@
 
 What you need to start the project:
 
->>>>>>>              Password in mysql bash  is 1234
+
 
 For running mysql Database.
 
