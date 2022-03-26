@@ -20,8 +20,8 @@ For running mysql Database.
 
 For running Spring Rest Api
 
-docker image build -t employee-jdbc .
+docker image build -t football_manager_spring .
 
-docker-compose up
+docker run -p 8080:8080 football_manager_spring
 
 
