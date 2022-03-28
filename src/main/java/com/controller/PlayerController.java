@@ -63,10 +63,6 @@ public class PlayerController {
         playerService.addNewPlayer(player,team_name);
         return ResponseEntity.ok().build() ;
 
-
-
-
-
     }
 
     @PutMapping(path = "/")
